@@ -1,0 +1,11 @@
+有时候需要改动内核的文件，自己编译一个新的内核镜像，按照如下方法：
+
+1 ， 下载linux文件
+用这条指令：
+wget https://github.com/raspberrypi/linux/archive/rpi-3.18.y.zip
+其中最后的3.18.y可以根据github上得版本号来确定，替换成相应的版本即可
+
+2 ， 解压文件
+unzip rpi-3.18.y.zip
+
+3 ， 
