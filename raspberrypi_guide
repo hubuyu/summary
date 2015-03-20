@@ -1,0 +1,41 @@
+摘要：本文介绍怎么在MAC系统下将树莓派的官方镜像文件写到SD卡里
+
+COMMAND LINE
+
+If you are comfortable with the command line, you can image a card without any additional software. Run:
+
+diskutil list
+
+Identify the disk (not partition) of your SD card e.g. disk4 (not disk4s1):
+
+diskutil unmountDisk /dev/<disk# from diskutil>
+
+e.g. diskutil unmountDisk /dev/disk4
+
+sudo dd bs=1m if=image.img of=/dev/<disk# from diskutil>
+
+e.g. sudo dd bs=1m if=2015-02-16-raspbian-wheezy.img of=/dev/disk4
+
+This may result in an dd: invalid number '1m' error if you have GNU coreutils installed. In that case you need to use 1M:
+
+sudo dd bs=1M if=image.img of=/dev/<disk# from diskutil>
+
+This will take a few minutes.
+
+
+第一步 先确定是哪个磁盘，查看方法是
+diskutil list
+一般显示是disk2 ，注意不是disk2s1这种形式
+
+其次，卸载SDka所在的磁盘，注意不是弹出，用到的指令是
+diskutil unmountDisk /dev/<disk# from diskutil>
+e.g. diskutil unmountDisk /dev/disk2
+
+接下来就可以写了，用到的指令是
+sudo dd bs=1m if=2015-02-16-raspbian-wheezy.img of=/dev/disk2
+
+写入的时间比较长，大概五分钟以上，而且写入过程屏幕没反应，类似于死机了一样，需要耐心等待，当写完了以后，会有这样的显示：
+……
+
+
+
