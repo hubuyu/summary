@@ -36,6 +36,13 @@
 最后，git push origin master就ok了
 
 
+第三种情况，远程服务器端的文件有更改，本地也有更改的情况
+首先需要将本地和远程的服务器同步一下，怎么同步呢？
+用git pull 这个指令，
+但是这个pull之后接什么，还没搞得懂
+
+之后的步骤也是先add 再commit了
+
 
 可以参考这个网址的文章：
 http://blog.csdn.net/gavincook/article/details/11992827
