@@ -34,3 +34,8 @@
 接着，用git commit <文件名> ，会跳出一个text文档，需要填写一下
 
 最后，git push origin master就ok了
+
+
+
+可以参考这个网址的文章：
+http://blog.csdn.net/gavincook/article/details/11992827
