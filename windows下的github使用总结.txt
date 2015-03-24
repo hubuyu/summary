@@ -8,3 +8,20 @@
 	
 	git clone https://github.com/hubuyu/summary.git
 5  克隆好后会在该目录下发现summary下的几个文件全都复制到本地了
+
+6 在gitshell中使用git status，可以看到相应的改动
+
+7 使用git add ，将所有的改动加入到缓存区
+  使用的指令是git add .
+
+8 ，然后使用git commit -m “备注信息”将改动提交到本地仓库
+，其中“备注信息”可以改为任何想改的东西
+
+9 ， 最后将代码提交到远程服务器
+用的是 git push origin master
+
+
+到此就完成一次代码提交
+
+问题是第二次我有更改的时候该怎么提交呢？
+
