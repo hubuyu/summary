@@ -1,0 +1,10 @@
+1 https://windows.github.com/ 下载安装
+
+2 安装完后在桌面上会显示两个图标，一个是Git shell ， 另一个是Github
+
+3 点击进去git shell 
+
+4 ，因为在Github图形界面配置好了用户名和邮箱，所以配置过程跳过，直接clone 某个仓库，例如
+	
+	git clone https://github.com/hubuyu/summary.git
+5  克隆好后会在该目录下发现summary下的几个文件全都复制到本地了
