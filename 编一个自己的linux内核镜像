@@ -8,79 +8,79 @@
 2 ， 解压文件
     unzip rpi-3.18.y.zip
 
-3 ， 将文件移到另一个自己看着舒服的地方
+3 ，将文件移到另一个自己看着舒服的地方
 
 4 ， 当内核目录的根目录下，执行zcat /proc/config.gz > .config
-将当前正在使用的系统的内核配置生成内核配置信息
-或者用这条指令
- gzip -dc /proc/config.gz > .config
+    将当前正在使用的系统的内核配置生成内核配置信息
+    或者用这条指令
+    gzip -dc /proc/config.gz > .config
  
  5 ，执行make menuconfig
- 会出现如下报错
- pi@raspberrypi ~/Source/linux-rpi-3.18.y $ make menuconfig
-  HOSTCC  scripts/basic/fixdep
-  HOSTCC  scripts/kconfig/mconf.o
-In file included from scripts/kconfig/mconf.c:23:0:
-scripts/kconfig/lxdialog/dialog.h:38:20: fatal error: curses.h: No such file or directory
-compilation terminated.
-scripts/Makefile.host:108: recipe for target 'scripts/kconfig/mconf.o' failed
-make[1]: *** [scripts/kconfig/mconf.o] Error 1
-Makefile:541: recipe for target 'menuconfig' failed
-make: *** [menuconfig] Error 2
-pi@raspberrypi ~/Source/linux-rpi-3.18.y $ 
-原因是少了ncurses库和zlib库
+    会出现如下报错
+    pi@raspberrypi ~/Source/linux-rpi-3.18.y $ make menuconfig
+    HOSTCC  scripts/basic/fixdep
+    HOSTCC  scripts/kconfig/mconf.o
+    In file included from scripts/kconfig/mconf.c:23:0:
+    scripts/kconfig/lxdialog/dialog.h:38:20: fatal error: curses.h: No such file or directory
+    compilation terminated.
+    scripts/Makefile.host:108: recipe for target 'scripts/kconfig/mconf.o' failed
+    make[1]: *** [scripts/kconfig/mconf.o] Error 1
+    Makefile:541: recipe for target 'menuconfig' failed
+    make: *** [menuconfig] Error 2
+    pi@raspberrypi ~/Source/linux-rpi-3.18.y $ 
+    原因是少了ncurses库和zlib库
 
 6 通过这个指令下载ncurses库
-  wget http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz
-  通过这个指令来下载zlib库
-  wget http://zlib.net/zlib-1.2.8.tar.gz
+    wget http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz
+    通过这个指令来下载zlib库
+    wget http://zlib.net/zlib-1.2.8.tar.gz
   
-  下载好后，解压安装
-  tar xzvf ncurses-5.9.tar.gz 
-  cd ncurses-5.9/
-  ./configure 
-  make all
-  sudo make install
-注意，最后一步需要有管理员权限，否则会报错如下：
-pi@raspberrypi ~/Downloads/ncurses-5.9 $ make install
-cd man && make DESTDIR="" install
-make[1]: Entering directory '/home/pi/Downloads/ncurses-5.9/man'
-mkdir -p /usr/man
-mkdir: cannot create directory `/usr/man': Permission denied
-Makefile:56: recipe for target '/usr/man' failed
-make[1]: *** [/usr/man] Error 1
-make[1]: Leaving directory '/home/pi/Downloads/ncurses-5.9/man'
-Makefile:109: recipe for target 'install' failed
-make: *** [install] Error 2
+    下载好后，解压安装
+    tar xzvf ncurses-5.9.tar.gz 
+    cd ncurses-5.9/
+    ./configure 
+    make all
+    sudo make install
+    注意，最后一步需要有管理员权限，否则会报错如下：
+    pi@raspberrypi ~/Downloads/ncurses-5.9 $ make install
+    cd man && make DESTDIR="" install
+    make[1]: Entering directory '/home/pi/Downloads/ncurses-5.9/man'
+    mkdir -p /usr/man
+    mkdir: cannot create directory `/usr/man': Permission denied
+    Makefile:56: recipe for target '/usr/man' failed
+    make[1]: *** [/usr/man] Error 1
+    make[1]: Leaving directory '/home/pi/Downloads/ncurses-5.9/man'
+    Makefile:109: recipe for target 'install' failed
+    make: *** [install] Error 2
 
-对于zlib也是一样的操作
-tar xzvf zlib-1.2.8.tar.gz 
-cd zlib-1.2.8/
-./configure 
-make all
-sudo make install
+    对于zlib也是一样的操作
+    tar xzvf zlib-1.2.8.tar.gz 
+    cd zlib-1.2.8/
+    ./configure 
+    make all
+    sudo make install
 
-最后一步也是得有管理员权限，否则报错如下：
-pi@raspberrypi ~/Downloads/zlib-1.2.8 $ make install
-mkdir: cannot create directory `/usr/local/share/man/man3': Permission denied
-Makefile:188: recipe for target 'install-libs' failed
-make: [install-libs] Error 1 (ignored)
-mkdir: cannot create directory `/usr/local/lib/pkgconfig': Permission denied
-Makefile:188: recipe for target 'install-libs' failed
-make: [install-libs] Error 1 (ignored)
-cp libz.a /usr/local/lib
-cp: cannot create regular file `/usr/local/lib/libz.a': Permission denied
-Makefile:188: recipe for target 'install-libs' failed
-make: *** [install-libs] Error 1
+    最后一步也是得有管理员权限，否则报错如下：
+    pi@raspberrypi ~/Downloads/zlib-1.2.8 $ make install
+    mkdir: cannot create directory `/usr/local/share/man/man3': Permission denied
+    Makefile:188: recipe for target 'install-libs' failed
+    make: [install-libs] Error 1 (ignored)
+    mkdir: cannot create directory `/usr/local/lib/pkgconfig': Permission denied
+    Makefile:188: recipe for target 'install-libs' failed
+    make: [install-libs] Error 1 (ignored)
+    cp libz.a /usr/local/lib
+    cp: cannot create regular file `/usr/local/lib/libz.a': Permission denied
+    Makefile:188: recipe for target 'install-libs' failed
+    make: *** [install-libs] Error 1
 
 7 ,再次回到linux内核代码目录，执行make menuconfig
-什么也不勾选，字节保存当前的配置再退出
-到此，准备工作已经准备就绪，可以开始编译内核了
+    什么也不勾选，字节保存当前的配置再退出
+    到此，准备工作已经准备就绪，可以开始编译内核了
 
 8，执行
-make
-即开始了内核的编译工作
-我得内核编译开始于13：52分钟
+    make
+    即开始了内核的编译工作
+    我得内核编译开始于13：52分钟
 
 
 
