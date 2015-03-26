@@ -82,6 +82,24 @@
     即开始了内核的编译工作
     我得内核编译开始于13：52分钟
 
+9, 在编译的过程中遇到这样一个报错
+    CC      kernel/sched/debug.o
+      CC      kernel/sched/cpuacct.o
+    LD      kernel/sched/built-in.o
+    HZFILE  kernel/time/hz.bc
+    BC      kernel/time/timeconst.h
+    /bin/sh: 1: bc: not found
+    kernel/time/Makefile:32: recipe for target 'kernel/time/timeconst.h' failed
+    make[2]: *** [kernel/time/timeconst.h] Error 127
+    scripts/Makefile.build:402: recipe for target 'kernel/time' failed
+    make[1]: *** [kernel/time] Error 2
+    Makefile:937: recipe for target 'kernel' failed
+    make: *** [kernel] Error 2
+    原因是没有安装bc
+    那就安装bc即可：
+    sudo apt-get install bc
+    
+10 , 继续make
 
 
 
