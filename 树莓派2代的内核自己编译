@@ -1,0 +1,30 @@
+下载3.6.11+的内核源码
+$ wget https://github.com/raspberrypi/linux/archive/rpi-3.6.y.tar.gz
+
+用这种方式下载内核文件是最方便的，文件小，速度快
+
+
+下载好以后解压
+之前要装zlib库，还有ncurse文件
+
+将当前内核配置文件复制到内核源文件根目录
+cp /proc/config.gz > .config
+
+貌似是这样
+
+然后编译
+对于二代
+可以用make -j4来加快速度
+大概一个半小时就可以搞定
+
+然后呢
+编译好替换/boot目录下的kernel7.img文件
+这样子就可以正常起来了
+
+但是这种换了版本的内核文件
+以前的wifi配置也没了
+所以还得手动连一下网络，
+将驱动安装好后才可以wifi连接
+by sudo modules_install
+
+这样子应该就可以了
